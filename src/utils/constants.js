@@ -5,4 +5,4 @@ export const Youtube_Videos_Api =
   Google_api_key;
 
 export const Youtube_Search_Api =
-  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=";
+  "http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=xxxx";

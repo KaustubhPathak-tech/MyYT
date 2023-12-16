@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 import { toggleMenu } from "../utils/appSlice";
 import { useSearchParams } from "react-router-dom";
 import { Youtube_Search_Api } from "../utils/constants";
@@ -25,7 +26,7 @@ const Head = () => {
       } else {
         getSearchSuggestions();
       }
-    }, 200);
+    }, 2000);
 
     return () => {
       console.log("clear time out called");
@@ -35,14 +36,17 @@ const Head = () => {
 
   const getSearchSuggestions = async () => {
     console.log("api called ", searchQuery);
-    const data = await fetch(Youtube_Search_Api + searchQuery);
-    const json = await data.json();
-    setSuggestions(json[1]);
+    const data = await axios.get("http://localhost:8080/api", {
+      params: { q: searchQuery },
+    });
+    const json =data;
+    console.log("data", json.data.items);
+    setSuggestions(json.data);
 
     // update cache
     dispatch(
       cacheResults({
-        [searchQuery]: json[1],
+        [searchQuery]: json.data[1],
       })
     );
   };
@@ -80,7 +84,7 @@ const Head = () => {
         {showSuggestions && (
           <div className=" fixed bg-white px-5 py-2 w-[50rem] rounded-lg shadow-lg ">
             <ul>
-              {suggestions.map((s) => (
+              {suggestions?.map((s) => (
                 <li key={s} className="py-2 px-3 shadow-sm hover:bg-gray-100">
                   🔍 {s}
                 </li>
@@ -100,5 +104,3 @@ const Head = () => {
   );
 };
 export default Head;
-
-
