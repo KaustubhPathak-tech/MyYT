@@ -27,19 +27,6 @@ const Head = () => {
       }
     }, 200);
 
-    // key - i pressed
-    //  - render the component
-    //  - useEffect()
-    //  - start timer => make the api cal after 200ms
-
-    // key - ip pressed
-    //  - destroy the component(useEffect return method)
-    //  - re-render the component
-    //  - useEffect()
-    //  - start timer  => make api call after 200ms
-
-    // setTimeout(200) - make an api call after 200ms
-
     return () => {
       console.log("clear time out called");
       clearTimeout(timer);
@@ -58,7 +45,6 @@ const Head = () => {
         [searchQuery]: json[1],
       })
     );
-    // console.log("searched data = ", json[1]);
   };
   return (
     <div className="grid grid-flow-col p-3 m-2 shadow-lg">
@@ -115,4 +101,4 @@ const Head = () => {
 };
 export default Head;
 
-//  ! if we search any item that make an api call but if we again search that element we have to handle that in that search there is no api call it should store in cache.
+
