@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toggleMenu } from "../utils/appSlice";
-import {  useSearchParams } from "react-router-dom";
+import { useSearchParams } from "react-router-dom";
 import { Youtube_Search_Api } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 const Head = () => {
@@ -80,19 +80,19 @@ const Head = () => {
             🔍
           </button>
         </div>
-        {
-          localStorage?.getItem("data") && (
-            <>
-              <div>
+        {localStorage?.getItem("data") && (
+          <>
+            <div>
+              <a
+                href={`https://www.youtube.com/watch?v=${suggestions?.[0]?.id}`}
+              >
                 {suggestions?.[0]?.snippet?.title}
-              </div>
-            </>
-          )
-        }
+              </a>
+            </div>
+          </>
+        )}
         {showSuggestions && (
-          <div className=" fixed bg-white px-5 py-2 w-[50rem] rounded-lg shadow-lg ">
-            
-          </div>
+          <div className=" fixed bg-white px-5 py-2 w-[50rem] rounded-lg shadow-lg "></div>
         )}
       </div>
       <div className="col-span-1">
