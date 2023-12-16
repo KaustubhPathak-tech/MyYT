@@ -34,4 +34,3 @@ export default VideoCard;
 //  - if difference between 2 key strokes is < 200ms - decline api channelTitle
 //  > 200ms make an api call
 
-fetch("http://suggestqueries.google.com/complete/search?client=firefox&ds=yt&q=iPhone")

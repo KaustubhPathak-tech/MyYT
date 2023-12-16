@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import axios from "axios";
 import { toggleMenu } from "../utils/appSlice";
-import { useSearchParams } from "react-router-dom";
+import {  useSearchParams } from "react-router-dom";
 import { Youtube_Search_Api } from "../utils/constants";
 import { cacheResults } from "../utils/searchSlice";
 const Head = () => {
@@ -11,9 +11,8 @@ const Head = () => {
     dispatch(toggleMenu());
   };
   const [searchQuery, setSearchQuery] = useState("");
-  const [suggestions, setSuggestions] = useState([]);
+  const [suggestions, setSuggestions] = useState();
   const [showSuggestions, setShowSuggestions] = useState(false);
-
   const searchCache = useSelector((store) => store.search);
 
   useEffect(() => {
@@ -39,17 +38,18 @@ const Head = () => {
     const data = await axios.get("http://localhost:8080/api", {
       params: { q: searchQuery },
     });
-    const json =data;
-    console.log("data", json.data.items);
-    setSuggestions(json.data);
-
+    const json = data;
+    localStorage.setItem("data", JSON.stringify(json.data.items));
+    setSuggestions(json.data.items);
+    setShowSuggestions(true);
     // update cache
     dispatch(
       cacheResults({
-        [searchQuery]: json.data[1],
+        // [searchQuery]:json.data.items,
       })
     );
   };
+  console.log(suggestions);
   return (
     <div className="grid grid-flow-col p-3 m-2 shadow-lg">
       <div className="flex col-span-1">
@@ -81,15 +81,18 @@ const Head = () => {
             🔍
           </button>
         </div>
+        {
+          localStorage?.getItem("data") && (
+            <>
+              <div>
+                {suggestions[0]?.snippet?.title}
+              </div>
+            </>
+          )
+        }
         {showSuggestions && (
           <div className=" fixed bg-white px-5 py-2 w-[50rem] rounded-lg shadow-lg ">
-            <ul>
-              {suggestions?.map((s) => (
-                <li key={s} className="py-2 px-3 shadow-sm hover:bg-gray-100">
-                  🔍 {s}
-                </li>
-              ))}
-            </ul>
+            
           </div>
         )}
       </div>
