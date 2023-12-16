@@ -85,7 +85,7 @@ const Head = () => {
           localStorage?.getItem("data") && (
             <>
               <div>
-                {suggestions[0]?.snippet?.title}
+                {suggestions?.[0]?.snippet?.title}
               </div>
             </>
           )
