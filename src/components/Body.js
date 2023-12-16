@@ -9,7 +9,7 @@ const Body = () => {
         <Sidebar />
       </div>
       <div className="w-17/20">
-        {/* sometimes i want mainpage but sometimes i want watchpage so in this case we use <outlet/> */}
+        
         <Outlet />
       </div>
     </div>

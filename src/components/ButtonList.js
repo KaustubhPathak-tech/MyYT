@@ -13,10 +13,6 @@ const ButtonList = () => {
     "Satsang",
     "Mashup 2023",
     "Valentine",
-    // "Data Structure",
-    // "Algorithms",
-    // "C",
-    // "Cpp",
   ];
   return (
     <div className="flex ">
