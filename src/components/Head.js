@@ -34,8 +34,7 @@ const Head = () => {
   }, [searchQuery]);
 
   const getSearchSuggestions = async () => {
-    console.log("api called ", searchQuery);
-    const data = await axios.get("http://localhost:8080/api", {
+    const data = await axios.get("https://ytserver-tau.vercel.app/api", {
       params: { q: searchQuery },
     });
     const json = data;
@@ -70,7 +69,7 @@ const Head = () => {
         <div>
           <input
             type="text"
-            placeholder="Search"
+            placeholder="Search by Youtube Video ID"
             className=" w-3/4 py-1 px-4 border border-gray-400 rounded-l-full"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
